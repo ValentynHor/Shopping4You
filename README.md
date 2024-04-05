@@ -71,7 +71,7 @@ Die Dokumentation für den Feedback-Service wurde mithilfe des Asciidoctor-Maven
 
 Um sicherzustellen, dass die Dokumentation korrekt ist, wurde am Ende des Erstellungsprozesses `maven verify` ausgeführt.
 
-Die vollständige Dokumentation ist [hier](feedbackDocumentation.html) verfügbar. (feedbackDocumentation.html)
+Die vollständige Dokumentation ist [hier](https://github.com/ValentynHor/Testing-Documentation/blob/master/feedbackDocumentation.html) verfügbar. (feedbackDocumentation.html)
 
 # Testen
 
