@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unsere Waren &ndash; Shopping4you</title>
+    <link rel="stylesheet" href="/css/list.css">
+</head>
+<body>
+<a data-th-href="@{/customer/products/favourites}">Liebste Waren</a>
+<h1>Unsere Waren</h1>
+<form>
+    <label>Filter: <input type="text" name="filter" data-th-value="${filter}"> <button type="submit">Suchen</button></label>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th class="center">#</th>
+        <th>Ware</th>
+        <th>Beschreibung</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="product, productIndex : ${products}">
+        <td data-th-text="${productIndex.index + 1}" class="center-color"></td>
+        <td>
+            <a data-th-href="@{/customer/products/{productId}(productId=${product.id})}"
+               data-th-text="${product.title}"></a>
+        </td>
+        <td data-th-text="${product.details}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Warenliste &ndash; Shopping4you</title>
+    <link rel="stylesheet" href="/css/list.css">
+</head>
+
+<body>
+<a data-th-href="@{/catalogue/products/create}">+ Ware erstellen</a>
+<h1>Warenliste </h1>
+<form method="get" data-th-action="@{/catalogue/products/list}">
+    <label>Filter:<input type="text" name="filter" data-th-value="${filter}">
+        <button type="submit">Suchen</button>
+    </label>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th class="center">#</th>
+        <th class="center">ID</th>
+        <th>Ware</th>
+        <th>Beschreibung</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="product, productIndex : ${products}">
+        <td data-th-text="${productIndex.index + 1}" class="center-color"></td>
+        <td data-th-text="${product.id}" class="center"></td>
+        <td>
+            <a data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}"
+               data-th-text="${product.title}"></a>
+        </td>
+        <td data-th-text="${product.details}"></td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

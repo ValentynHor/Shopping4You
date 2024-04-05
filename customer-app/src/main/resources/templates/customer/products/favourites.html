@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liebste Waren &ndash; Shopping4you</title>
+    <link rel="stylesheet" href="/css/favourites.css">
+</head>
+<body>
+<a data-th-href="@{/customer/products/list}">zur Warenliste</a>
+<h1>Liebste Waren</h1>
+<form>
+    <label>Filter: <input type="text" name="filter" data-th-value="${filter}"> <button type="submit">Suchen</button></label>
+</form>
+<ul>
+    <li data-th-each="product : ${products}">
+        <strong>
+            <a data-th-text="${product.title}"
+               data-th-href="@{/customer/products/{productId}(productId=${product.id})}"></a>
+        </strong>
+        <p data-th-text="${product.details}"></p>
+    </li>
+</ul>
+</body>
+</html>

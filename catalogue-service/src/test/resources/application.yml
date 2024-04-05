@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:16:///shopping2test?TC_DAEMON=true
+    username: postgres
+    password: 12345678

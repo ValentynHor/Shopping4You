@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${product.title}]] &ndash; Shopping4you</title>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+<a data-th-href="@{/catalogue/products/list}">&larr; Zur Warenliste</a>
+<h1 data-th-text="${product.title}"></h1>
+<table>
+    <tr>
+        <td class="color"><strong>ID</strong>:</td>
+        <td><span data-th-text="${product.id}"></span></td>
+    </tr>
+    <tr>
+        <td class="color"><strong>Ware</strong>:</td>
+        <td><span data-th-text="${product.title}"></span></td>
+    </tr>
+    <tr>
+        <td class="color"><strong>Beschreibung</strong>:</td>
+        <td><span data-th-text="${product.details}"></span></td>
+    </tr>
+</table>
+<div></br></div>
+<div class="button-container">
+
+    <a data-th-href="@{/catalogue/products/{productId}/edit(productId=${product.id})}" class="a-button">Ändern</a>
+
+    <form method="post" data-th-action="@{/catalogue/products/{productId}/delete(productId=${product.id})}">
+        <button type="submit">Löschen</button>
+    </form>
+</div>
+
+</body>
+</html>

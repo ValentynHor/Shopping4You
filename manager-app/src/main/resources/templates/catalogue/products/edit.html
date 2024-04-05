@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Warenänderung &laquo;[[${product.title}]]&raquo; &ndash; Shopping4you</title>
+    <link rel="stylesheet" href="/css/edit.css">
+</head>
+<body>
+<a data-th-href="@{/catalogue/products/{productId}(productId=${product.id})}">&larr; Zur Warenliste</a>
+<h1>Warenänderung &laquo;[[${product.title}]]</h1>
+<div data-th-if="${errors}">
+    <h2>Errors</h2>
+    <ul>
+        <li data-th-each="error: ${errors}" data-th-text="${error}" style="color: red;"></li>
+    </ul>
+</div>
+<form method="post" data-th-action="@{/catalogue/products/{productId}/edit(productId=${product.id})}">
+    <label>
+        Ware:<br>
+        <input type="text" name="title" data-th-value="${payload != null ? payload.title : product.title}">
+    </label><br>
+    <label>
+        Beschreibung:<br>
+        <textarea name="details" data-th-text="${payload != null ? payload.details : product.details}"></textarea>
+    </label><br>
+    <button type="submit">Ändern</button>
+</form>
+</body>
+</html>

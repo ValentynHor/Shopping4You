@@ -1,0 +1,74 @@
+Führen Sie die alle Tests aus, um Snippets im "target"-Ordner zu generieren.
+
+////
+= REST API feedback service
+:toc: left
+
+== Review
+
+=== Review Creation
+
+This endpoint allows users to create a new review for a product.
+
+.Response Body
+
+.request
+include::{snippets}/feedback/product_reviews/create_product_review/http-request.adoc[]
+
+.request properties
+include::{snippets}/feedback/product_reviews/create_product_review/request-fields.adoc[]
+
+.response
+include::{snippets}/feedback/product_reviews/create_product_review/http-response.adoc[]
+
+.response properties
+include::{snippets}/feedback/product_reviews/create_product_review/response-fields.adoc[]
+
+=== Find Reviews by Product ID
+
+This endpoint retrieves all reviews associated with a specific product based on its ID.
+
+.Response Body
+
+.request
+include::{snippets}/feedback/product_reviews/find_reviews_by_product_id/http-request.adoc[]
+
+.response
+include::{snippets}/feedback/product_reviews/find_reviews_by_product_id/http-response.adoc[]
+
+.response properties
+include::{snippets}/feedback/product_reviews/find_reviews_by_product_id/response-fields.adoc[]
+
+== Favourite Products
+
+=== Find Favourites by ProductID
+
+This endpoint retrieves all favourite products associated with a specific product based on its ID.
+
+.Response Body
+
+.request
+include::{snippets}/feedback/favourite_products/findFavouriteProducts/httpie-request.adoc[]
+
+.response
+include::{snippets}/feedback/favourite_products/findFavouriteProducts/response-fields.adoc[]
+
+=== Find Favourite  by ProductID
+
+This endpoint retrieves the favourite product associated with a specific product based on its ID.
+
+include::{snippets}/feedback/favourite_products_by_product_id/http-request.adoc[]
+
+include::{snippets}/feedback/favourite_products_by_product_id/response-fields.adoc[]
+
+=== Add Favourite Product
+
+This endpoint allows users to add a new favourite product.
+
+include::{snippets}/feedback/add-favourite-product/http-request.adoc[]
+
+include::{snippets}/feedback/add-favourite-product/response-fields.adoc[]
+
+
+////
+
