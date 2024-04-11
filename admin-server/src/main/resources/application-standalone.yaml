@@ -1,0 +1,29 @@
+
+server:
+  port: 8085
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/shopping2
+
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/shopping2
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics
+            client-id: admin-service
+            client-secret: qHZBbi14nXhDBfY2p8MUi2Ts3W0An8in
+          login:
+            provider: keycloak
+            scope:
+              - metrics
+              - openid
+            client-id: admin-service
+            client-secret: qHZBbi14nXhDBfY2p8MUi2Ts3W0An8in

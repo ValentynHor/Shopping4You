@@ -1,4 +1,15 @@
+server:
+  port: 8081
+
 spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8085
+        instance:
+          name: catalogue-service
+          service-host-type: ip
+        enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5433/shopping2
     username: postgres
@@ -14,8 +25,17 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8082/realms/shopping2
-server:
-  port: 8081
+      client:
+        registration:
+          keycloak:
+            client-id: catalogue-service-metrics-client
+            client-secret: pSEcb5KGPb2VX8kmbUqGarZ9SDys9xd0
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics_server
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/shopping2
 logging:
   level:
     sql: info
@@ -25,7 +45,15 @@ springdoc:
     oauth:
       client-id: catalogue-service-swagger-ui
       use-pkce-with-authorization-code-grant: true
-
-
 keycloak:
   uri: http://localhost:8082
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

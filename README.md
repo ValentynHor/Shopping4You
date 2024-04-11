@@ -1,4 +1,4 @@
-# Testing and Documentation
+# **_Phase 1_** : Testing and Documentation
 Das Ziel dieses Projekts ist es, alle geschriebene Klassen **vollständig zu testen und zu dokumentieren**. Durch die Entwicklung von Microservices wird ein Onlineshop modelliert. Das folgende Schema wird dies etwas näher erläutern:
 
 ![Testing](images/testing.jpg)
@@ -71,11 +71,18 @@ Die Dokumentation für den Feedback-Service wurde mithilfe des Asciidoctor-Maven
 
 Um sicherzustellen, dass die Dokumentation korrekt ist, wurde am Ende des Erstellungsprozesses `maven verify` ausgeführt.
 
-Die vollständige Dokumentation ist [hier](feedbackDocumentation.html) verfügbar. (feedbackDocumentation.html)
+Die vollständige Dokumentation ist [hier](https://github.com/ValentynHor/Testing-Documentation/blob/master/feedbackDocumentation.html) verfügbar. (feedbackDocumentation.html)
 
 # Testen
 
 Um das Testprotokoll einzusehen, klicken Sie [hier](test.log). (test.log)
+
+
+# **_Phase 2_** : Administration
+
+Im Rahmen dieser Phase wurde der Admin Server erfolgreich in die Infrastruktur integriert. Als zentrale Anlaufstelle ermöglicht er Administratoren die Verwaltung und Überwachung der Microservices. Durch die Integration wichtiger Metriken und Protokolle können potenzielle Probleme frühzeitig erkannt und behoben werden, was die Gesamtleistung und Zuverlässigkeit des Systems verbessert. Die benutzerfreundliche Benutzeroberfläche des Admin Servers erleichtert den Zugriff und die Verwaltung aller Microservices, optimiert den Verwaltungsprozess und fördert die zentrale Steuerung der Systemlandschaft.
+Zusätzlich wurde die Spring Security entsprechend angepasst, um eine sichere Kommunikation zwischen dem Admin Server und den Microservices zu gewährleisten.Dies ermöglicht eine granulare Authentifizierung und Autorisierung für jeden Microservice, um auf die Metriken-Server zuzugreifen.
+
 
 
 
