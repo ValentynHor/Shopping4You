@@ -10,6 +10,8 @@ Das Ziel dieses Projekts ist es, alle geschriebene Klassen **vollständig zu tes
 - AsciiDoc & OpenAPI & Swagger
 - Mock & JUnit & Testcontainers
 - Lombok & Thymeleaf & Devtools
+- Admin Server
+- Victoria Metrics & Grafana
 
 # Microservice:
 
@@ -77,13 +79,27 @@ Die vollständige Dokumentation ist [hier](https://github.com/ValentynHor/Testin
 
 Um das Testprotokoll einzusehen, klicken Sie [hier](test.log). (test.log)
 
-
 # **_Phase 2_** : Administration
 
 Im Rahmen dieser Phase wurde der Admin Server erfolgreich in die Infrastruktur integriert. Als zentrale Anlaufstelle ermöglicht er Administratoren die Verwaltung und Überwachung der Microservices. Durch die Integration wichtiger Metriken und Protokolle können potenzielle Probleme frühzeitig erkannt und behoben werden, was die Gesamtleistung und Zuverlässigkeit des Systems verbessert. Die benutzerfreundliche Benutzeroberfläche des Admin Servers erleichtert den Zugriff und die Verwaltung aller Microservices, optimiert den Verwaltungsprozess und fördert die zentrale Steuerung der Systemlandschaft.
 Zusätzlich wurde die Spring Security entsprechend angepasst, um eine sichere Kommunikation zwischen dem Admin Server und den Microservices zu gewährleisten.Dies ermöglicht eine granulare Authentifizierung und Autorisierung für jeden Microservice, um auf die Metriken-Server zuzugreifen.
 
+# **_Phase 3_** : Monitoring
+
+Im Rahmen dieser Phase wurde die Monitoring-Infrastruktur erfolgreich implementiert, indem VictoriaMetrics und Grafana integriert wurden. Diese Tools ermöglichen die Überwachung und Visualisierung wichtiger Metriken und Leistungsdaten.
+
+Durch die Integration von VictoriaMetrics als zentraler Datenspeicher und Grafana als benutzerfreundliche Dashboard-Plattform kann man jetzt kritische Informationen wie CPU-Auslastung, Speichernutzung, Netzwerkleistung und andere relevante Metriken überwachen. Dies ermöglicht es, potenzielle Engpässe oder Leistungsprobleme frühzeitig zu erkennen und entsprechend zu reagieren, um die Gesamtleistung und Zuverlässigkeit des Systems zu optimieren.
+
+Darüber hinaus bietet Grafana eine Vielzahl von Visualisierungsoptionen und Alarmierungsfunktionen, die es uns ermöglichen, benutzerdefinierte Dashboards zu erstellen und Warnmeldungen einzurichten, um auf kritische Ereignisse oder Abweichungen von definierten Schwellenwerten aufmerksam zu machen. Dies trägt dazu bei, die Verfügbarkeit und Stabilität der Anwendung sicherzustellen und die Ausfallzeiten zu minimieren.
 
 
+Um Victoria Metrics als Docker-Container auszuführen, können Sie den folgenden Docker-Befehl verwenden:
+```
+docker run --name victoria-metrics -p 8428:8428 -v D:\Programming\Java\shopping4you\config\victoria-metrics\promscrape.yaml:/promscrape.yaml victoriametrics/victoria-metrics:v1.93.12 -promscrape.config=promscrape.yaml
+```
 
+Um Grafana als Docker-Container auszuführen, können Sie den folgenden Docker-Befehl verwenden:
+```
+docker run --name shopping4you-grafana -p 3000:3000 -v D:\Programming\Java\shopping4you\data\grafana:/var/lib/grafana grafana/grafana:10.2.4
+```
 

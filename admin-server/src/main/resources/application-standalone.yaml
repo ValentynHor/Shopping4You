@@ -7,7 +7,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/shopping2
+          issuer-uri: http://192.168.0.80:8082/realms/shopping2
 
       client:
         provider:
@@ -27,3 +27,10 @@ spring:
               - openid
             client-id: admin-service
             client-secret: qHZBbi14nXhDBfY2p8MUi2Ts3W0An8in
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
