@@ -1,6 +1,8 @@
 server:
   port: 8084
 spring:
+  application:
+    name: feedback-service
   boot:
     admin:
       client:
@@ -16,7 +18,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/shopping2
+          issuer-uri: http://192.168.0.80:8082/realms/shopping2
       client:
         registration:
           keycloak:
@@ -27,7 +29,7 @@ spring:
               - metrics_server
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/shopping2
+            issuer-uri: http://192.168.0.80:8082/realms/shopping2
 springdoc:
   swagger-ui:
     oauth:
@@ -45,5 +47,11 @@ management:
     web:
       exposure:
         include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://192.168.0.80:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 #normaly 30-40% genug
 
 

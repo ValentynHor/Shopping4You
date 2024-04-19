@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: catalogue-service
   boot:
     admin:
       client:
@@ -24,7 +26,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/shopping2
+          issuer-uri: http://192.168.0.80:8082/realms/shopping2
       client:
         registration:
           keycloak:
@@ -35,7 +37,7 @@ spring:
               - metrics_server
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/shopping2
+            issuer-uri: http://192.168.0.80:8082/realms/shopping2
 logging:
   level:
     sql: info
@@ -57,3 +59,9 @@ management:
     web:
       exposure:
         include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://192.168.0.80:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 #normaly 30-40% genug

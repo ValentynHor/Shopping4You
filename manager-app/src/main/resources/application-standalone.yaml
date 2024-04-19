@@ -4,6 +4,8 @@ shopping2:
       uri: http://localhost:8081
       registration-id: keycloak
 spring:
+  application:
+    name: manager-app
   boot:
     admin:
       client:
@@ -21,7 +23,7 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/shopping2
+            issuer-uri: http://192.168.0.80:8082/realms/shopping2
             user-name-attribute: preferred_username
         registration:
           keycloak:
@@ -41,7 +43,7 @@ spring:
               - metrics_server
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/shopping2
+          issuer-uri: http://192.168.0.80:8082/realms/shopping2
 management:
   health:
     livenessstate:
@@ -52,3 +54,9 @@ management:
     web:
       exposure:
         include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://192.168.0.80:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 #normaly 30-40% genug

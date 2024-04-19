@@ -101,14 +101,28 @@ Um Victoria Metrics als Docker-Container auszuführen, können Sie den folgenden
 docker run --name victoria-metrics -p 8428:8428 -v D:\Programming\Java\shopping4you\config\victoria-metrics\promscrape.yaml:/promscrape.yaml victoriametrics/victoria-metrics:v1.93.12 -promscrape.config=promscrape.yaml
 ```
 
-Um Grafana als Docker-Container auszuführen, können Sie den folgenden Docker-Befehl verwenden:
+Grafana:
 ```
 docker run --name shopping4you-grafana -p 3000:3000 -v D:\Programming\Java\shopping4you\data\grafana:/var/lib/grafana grafana/grafana:10.2.4
 ```
 
-Loki
-
+Loki:
 ```
 docker run --name shopping4you-loki -p 3100:3100 grafana/loki:2.9.4
 ```
+
+# **_Phase 4_** : Tracing
+
+Im Rahmen dieser Phase wurde auch das Tempo-Tracing erfolgreich integriert, um eine umfassende Tracing-Lösung zu schaffen. Tempo ist ein Open-Source-Tracing-System, das speziell für Cloud-native Umgebungen entwickelt wurde. Es ermöglicht die kontinuierliche Erfassung, Speicherung und Analyse von Tracing-Daten in großem Maßstab.
+
+Durch die Integration von Tempo können Entwickler und Betreiber detaillierte Einblicke in die Abläufe und Interaktionen innerhalb ihrer Anwendungen gewinnen. Dies umfasst das Verfolgen von Anfragen durch verschiedene Dienste und Komponenten, das Aufdecken von Latenzproblemen und das Identifizieren von Engpässen in der Anwendungsarchitektur.
+
+Grafana bietet eine Vielzahl von Visualisierungsoptionen, einschließlich Diagrammen, Grafiken und Dashboards, die es den Teams ermöglichen, einen ganzheitlichen Überblick über die Anwendungsleistung zu erhalten. Durch die visuelle Darstellung der Tracing-Daten in Grafana können Entwickler und Betreiber potenzielle Engpässe identifizieren, Trends erkennen und proaktiv auf Leistungsprobleme reagieren, um die Effizienz und Zuverlässigkeit der Anwendung zu maximieren.
+
+Um Tracing in Ihrem Docker-Container für Projekt zu ermöglichen:
+
+```
+docker run --name shopping4you-tracing -p 3200:3200 -p 9095:9095 -p 4317:4317 -p 4318:4318 -p 9411:9411 -p 14268:14268 -v D:\Programming\Java\shopping4you\config\tempo\tempo.yaml:/etc/tempo.yaml  grafana/tempo:2.3.1 -config.file=/etc/tempo.yaml
+```
+
 
