@@ -11,8 +11,8 @@ Das Ziel dieses Projekts ist es, alle geschriebene Klassen **vollständig zu tes
 - Mock & JUnit & Testcontainers
 - Lombok & Thymeleaf & Devtools
 - Admin Server
-- Victoria Metrics & Grafana
-
+- Victoria Metrics & Loki & Grafana
+- 
 # Microservice:
 
 - ## Keycloak
@@ -84,7 +84,7 @@ Um das Testprotokoll einzusehen, klicken Sie [hier](test.log). (test.log)
 Im Rahmen dieser Phase wurde der Admin Server erfolgreich in die Infrastruktur integriert. Als zentrale Anlaufstelle ermöglicht er Administratoren die Verwaltung und Überwachung der Microservices. Durch die Integration wichtiger Metriken und Protokolle können potenzielle Probleme frühzeitig erkannt und behoben werden, was die Gesamtleistung und Zuverlässigkeit des Systems verbessert. Die benutzerfreundliche Benutzeroberfläche des Admin Servers erleichtert den Zugriff und die Verwaltung aller Microservices, optimiert den Verwaltungsprozess und fördert die zentrale Steuerung der Systemlandschaft.
 Zusätzlich wurde die Spring Security entsprechend angepasst, um eine sichere Kommunikation zwischen dem Admin Server und den Microservices zu gewährleisten.Dies ermöglicht eine granulare Authentifizierung und Autorisierung für jeden Microservice, um auf die Metriken-Server zuzugreifen.
 
-# **_Phase 3_** : Monitoring
+# **_Phase 3_** : Monitoring and Logging
 
 Im Rahmen dieser Phase wurde die Monitoring-Infrastruktur erfolgreich implementiert, indem VictoriaMetrics und Grafana integriert wurden. Diese Tools ermöglichen die Überwachung und Visualisierung wichtiger Metriken und Leistungsdaten.
 
@@ -92,6 +92,9 @@ Durch die Integration von VictoriaMetrics als zentraler Datenspeicher und Grafan
 
 Darüber hinaus bietet Grafana eine Vielzahl von Visualisierungsoptionen und Alarmierungsfunktionen, die es uns ermöglichen, benutzerdefinierte Dashboards zu erstellen und Warnmeldungen einzurichten, um auf kritische Ereignisse oder Abweichungen von definierten Schwellenwerten aufmerksam zu machen. Dies trägt dazu bei, die Verfügbarkeit und Stabilität der Anwendung sicherzustellen und die Ausfallzeiten zu minimieren.
 
+Loki ermöglicht das Sammeln, Speichern und Analysieren von Protokolldaten aus verschiedenen Quellen in einem zentralen Service. Durch die Integration von Loki können sämtliche Protokolle von Anwendungen, Diensten und Systemkomponenten effizient gesammelt und in einem einheitlichen Format gespeichert werden. Dies erleichtert die Suche, Analyse und Visualisierung von Protokolldaten, was wiederum eine schnellere Fehlerbehebung und ein verbesserter Einblick in das Systemverhalten ermöglicht.
+
+Durch die Kombination von Loki mit Grafana können wir außerdem benutzerdefinierte Dashboards erstellen, um sowohl Metriken als auch Protokolle in einer einzigen Ansicht zu visualisieren. Dies ermöglicht eine ganzheitliche Überwachung und Analyse des Systems und trägt dazu bei, die Effizienz und Zuverlässigkeit unserer Anwendung weiter zu verbessern.
 
 Um Victoria Metrics als Docker-Container auszuführen, können Sie den folgenden Docker-Befehl verwenden:
 ```
@@ -101,5 +104,11 @@ docker run --name victoria-metrics -p 8428:8428 -v D:\Programming\Java\shopping4
 Um Grafana als Docker-Container auszuführen, können Sie den folgenden Docker-Befehl verwenden:
 ```
 docker run --name shopping4you-grafana -p 3000:3000 -v D:\Programming\Java\shopping4you\data\grafana:/var/lib/grafana grafana/grafana:10.2.4
+```
+
+Loki
+
+```
+docker run --name shopping4you-loki -p 3100:3100 grafana/loki:2.9.4
 ```
 
