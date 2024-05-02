@@ -1,70 +1,70 @@
 scrape_configs:
   - job_name: shopping4you_admin_service
     static_configs:
-      - targets: ["http://192.168.0.80:8085"]
+      - targets: ["http://172.23.16.1:8085"]
         labels:
           application: admin-service
     metrics_path: /actuator/prometheus
     oauth2:
       client_id: victoria-metrics
       client_secret: GZjBpV2TvvsGJ6wxHtnvpSklewckqGZ7
-      token_url: http://192.168.0.80:8082/realms/shopping2/protocol/openid-connect/token
+      token_url: http://172.23.16.1:8082/realms/shopping2/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
         grant_type: client_credentials
   - job_name: shopping4you_catalogue_service
     static_configs:
-      - targets: ["http://192.168.0.80:8081"]
+      - targets: ["http://172.23.16.1:8081"]
         labels:
           application: catalogue-service
     metrics_path: /actuator/prometheus
     oauth2:
       client_id: victoria-metrics
       client_secret: GZjBpV2TvvsGJ6wxHtnvpSklewckqGZ7
-      token_url: http://192.168.0.80:8082/realms/shopping2/protocol/openid-connect/token
+      token_url: http://172.23.16.1:8082/realms/shopping2/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
         grant_type: client_credentials
   - job_name: shopping4you_feedback_service
     static_configs:
-      - targets: ["http://192.168.0.80:8084"]
+      - targets: ["http://172.23.16.1:8084"]
         labels:
           application: feedback-service
     metrics_path: /actuator/prometheus
     oauth2:
       client_id: victoria-metrics
       client_secret: GZjBpV2TvvsGJ6wxHtnvpSklewckqGZ7
-      token_url: http://192.168.0.80:8082/realms/shopping2/protocol/openid-connect/token
+      token_url: http://172.23.16.1:8082/realms/shopping2/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
         grant_type: client_credentials
   - job_name: shopping4you_customer_app
     static_configs:
-      - targets: ["http://192.168.0.80:8083"]
+      - targets: ["http://172.23.16.1:8083"]
         labels:
           application: customer-app
     metrics_path: /actuator/prometheus
     oauth2:
       client_id: victoria-metrics
       client_secret: GZjBpV2TvvsGJ6wxHtnvpSklewckqGZ7
-      token_url: http://192.168.0.80:8082/realms/shopping2/protocol/openid-connect/token
+      token_url: http://172.23.16.1:8082/realms/shopping2/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:
         grant_type: client_credentials
   - job_name: shopping4you_manager_app
     static_configs:
-      - targets: ["http://192.168.0.80:8080"]
+      - targets: ["http://172.23.16.1:8080"]
         labels:
           application: manager-app
     metrics_path: /actuator/prometheus
     oauth2:
       client_id: victoria-metrics
       client_secret: GZjBpV2TvvsGJ6wxHtnvpSklewckqGZ7
-      token_url: http://192.168.0.80:8082/realms/shopping2/protocol/openid-connect/token
+      token_url: http://172.23.16.1:8082/realms/shopping2/protocol/openid-connect/token
       scopes:
         - metrics
       endpoint_params:

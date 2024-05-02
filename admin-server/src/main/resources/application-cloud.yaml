@@ -1,0 +1,48 @@
+server:
+  port: 8085
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.23.16.1:8082/realms/shopping2
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://172.23.16.1:8082/realms/shopping2
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics
+            client-id: admin-service
+            client-secret: HZBbi14nXhDBfY2p8MUi2Ts3W0An8in
+          login:
+            provider: keycloak
+            scope:
+              - metrics
+              - openid
+            client-id: admin-service
+            client-secret: HZBbi14nXhDBfY2p8MUi2Ts3W0An8in
+          discovery:
+            provider: keycloak
+            client-id: admin-service
+            client-secret: HZBbi14nXhDBfY2p8MUi2Ts3W0An8in
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://172.23.16.1:8761/eureka/
+    register-with-eureka: false

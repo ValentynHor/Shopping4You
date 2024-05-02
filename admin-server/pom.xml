@@ -54,6 +54,12 @@
             <artifactId>janino</artifactId>
         </dependency>
 
+        <!--    Phase 5 Eureka server    -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

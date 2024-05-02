@@ -1,0 +1,27 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            user-name-attribute: preferred_username
+            issuer-uri: http://172.23.16.1:8082/realms/shopping2
+        registration:
+          keycloak:
+            client-id: eureka-server
+            client-secret: xiaqySU2qH2ejBnXHsQwRlXBsMqJaNIh
+            scope:
+              - openid
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.23.16.1:8082/realms/shopping2

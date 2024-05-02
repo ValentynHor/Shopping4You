@@ -1,0 +1,64 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: shopping4you-feedback-service
+  boot:
+    admin:
+      client:
+        enabled: false
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/feedback
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.23.16.1:8082/realms/shopping2
+      client:
+        registration:
+          keycloak:
+            client-id: feedback-service
+            client-secret: TMO8foeltVu4b8r6yXoMz5Da5OvoxNnR
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics_server
+          discovery:
+            provider: keycloak
+            client-id: feedback-service
+            client-secret: TMO8foeltVu4b8r6yXoMz5Da5OvoxNnR
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+        provider:
+          keycloak:
+            issuer-uri: http://172.23.16.1:8082/realms/shopping2
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: feedback-service-swagger-ui
+      use-pkce-with-authorization-code-grant: true
+keycloak:
+  uri: http://localhost:8082
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://172.23.16.1:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 #normaly 30-40% genug
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

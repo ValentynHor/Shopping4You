@@ -98,7 +98,7 @@ Durch die Kombination von Loki mit Grafana können wir außerdem benutzerdefinie
 
 Um Victoria Metrics als Docker-Container auszuführen, können Sie den folgenden Docker-Befehl verwenden:
 ```
-docker run --name victoria-metrics -p 8428:8428 -v D:\Programming\Java\shopping4you\config\victoria-metrics\promscrape.yaml:/promscrape.yaml victoriametrics/victoria-metrics:v1.93.12 -promscrape.config=promscrape.yaml
+docker run --name victoria-metrics -p 8428:8428 -v D:/Programming/Java/shopping4you/config/victoria/promscrape.yaml:/promscrape.yaml victoriametrics/victoria-metrics:v1.93.12  
 ```
 
 Grafana:
@@ -124,5 +124,11 @@ Um Tracing in Ihrem Docker-Container für Projekt zu ermöglichen:
 ```
 docker run --name shopping4you-tracing -p 3200:3200 -p 9095:9095 -p 4317:4317 -p 4318:4318 -p 9411:9411 -p 14268:14268 -v D:\Programming\Java\shopping4you\config\tempo\tempo.yaml:/etc/tempo.yaml  grafana/tempo:2.3.1 -config.file=/etc/tempo.yaml
 ```
+
+# **_Phase 5_** : Eureka server
+
+Im Rahmen dieser Phase wurde die Integration des Eureka-Servers erfolgreich durchgeführt, um eine umfassende Service-Registrierungs- und -Entdeckungslösung zu schaffen. Der Eureka-Server ist ein Open-Source-Tool, das speziell für Microservices-Architekturen entwickelt wurde und es ermöglicht, Dienste automatisch zu registrieren und ihre Verfügbarkeit zu überwachen.
+
+Durch die Integration des Eureka-Servers können Entwickler und Betreiber einen zentralen Anlaufpunkt für die Verwaltung und Überwachung ihrer Mikroservices-Infrastruktur schaffen. Dies umfasst die automatische Registrierung und Entdeckung von Diensten, die Überwachung der Verfügbarkeit und die Erkennung von Ausfällen oder Engpässen in Echtzeit.
 
 

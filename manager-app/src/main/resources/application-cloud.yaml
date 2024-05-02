@@ -1,0 +1,71 @@
+shopping4you:
+  services:
+    catalogue:
+      uri: lb://shopping4you-catalogue-service
+      registration-id: keycloak
+spring:
+  application:
+    name: manager-app
+  boot:
+    admin:
+      client:
+        enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5433/shopping2
+    username: postgres
+    password: 12345678
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://172.23.16.1:8082/realms/shopping2
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: manager-app
+            client-secret: zfend08ini4FpbB8mBXr4chwp29DyZLj
+            scope:
+              - openid
+              - view_catalogue
+              - edit_catalogue
+              - microprofile-jwt
+          metrics:
+            provider: keycloak
+            client-id: manager-app-metrics-client
+            client-secret: Ox4ltZrpYUfdSy3ov4RzJTPK9AB6Tdps
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics_server
+          discovery:
+            provider: keycloak
+            client-id: manager-app
+            client-secret: Ox4ltZrpYUfdSy3ov4RzJTPK9AB6Tdps
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.23.16.1:8082/realms/shopping2
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://172.23.16.1:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 #normaly 30-40% genug
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

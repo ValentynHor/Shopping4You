@@ -9,6 +9,8 @@ import de.codecentric.boot.admin.client.registration.RegistrationClient;
 import io.micrometer.observation.ObservationRegistry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -17,55 +19,83 @@ import org.springframework.security.oauth2.client.ReactiveOAuth2AuthorizedClient
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction;
 import org.springframework.security.oauth2.client.web.server.ServerOAuth2AuthorizedClientRepository;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.DefaultClientRequestObservationConvention;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class ClientConfig {
 
-    @Bean
-    @Scope("prototype")
-    public WebClient.Builder selmagServicesWebClientBuilder(
-            ReactiveClientRegistrationRepository clientRegistrationRepository,
-            ServerOAuth2AuthorizedClientRepository authorizedClientRepository,
-            ObservationRegistry observationRegistry
-    ) {
-        ServerOAuth2AuthorizedClientExchangeFilterFunction filter =
-                new ServerOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository,
-                        authorizedClientRepository);
-        filter.setDefaultClientRegistrationId("keycloak");
-        return WebClient.builder()
-                .observationRegistry(observationRegistry)
-                .observationConvention(new DefaultClientRequestObservationConvention())
-                .filter(filter);
+    @Configuration
+    @ConditionalOnProperty(name = "eureka.client.enabled", havingValue = "false")
+    public static class StandaloneClientConfig {
+
+        @Bean
+        @Scope("prototype")
+        public WebClient.Builder shopping4youServicesWebClientBuilder(
+                ReactiveClientRegistrationRepository clientRegistrationRepository,
+                ServerOAuth2AuthorizedClientRepository authorizedClientRepository,
+                ObservationRegistry observationRegistry
+        ) {
+            ServerOAuth2AuthorizedClientExchangeFilterFunction filter =
+                    new ServerOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository,
+                            authorizedClientRepository);
+            filter.setDefaultClientRegistrationId("keycloak");
+            return WebClient.builder()
+                    .observationRegistry(observationRegistry)
+                    .observationConvention(new DefaultClientRequestObservationConvention())
+                    .filter(filter);
+        }
+    }
+
+    @Configuration
+    @ConditionalOnProperty(name = "eureka.client.enabled", havingValue = "true", matchIfMissing = true)
+    public static class CloudClientConfig {
+
+        @Bean
+        @LoadBalanced
+        @Scope("prototype")
+        public WebClient.Builder shopping4youServicesWebClientBuilder(
+                ReactiveClientRegistrationRepository clientRegistrationRepository,
+                ServerOAuth2AuthorizedClientRepository authorizedClientRepository,
+                ObservationRegistry observationRegistry
+        ) {
+            ServerOAuth2AuthorizedClientExchangeFilterFunction filter =
+                    new ServerOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationRepository,
+                            authorizedClientRepository);
+            filter.setDefaultClientRegistrationId("keycloak");
+            return WebClient.builder()
+                    .observationRegistry(observationRegistry)
+                    .observationConvention(new DefaultClientRequestObservationConvention())
+                    .filter(filter);
+        }
     }
 
     @Bean
     public WebClientProductsClient webClientProductsClient(
-            @Value("${selmag.services.catalogue.uri:http://localhost:8081}") String catalogueBaseUrl,
-            WebClient.Builder selmagServicesWebClientBuilder
+            @Value("${shopping4you.services.catalogue.uri:http://localhost:8081}") String catalogueBaseUrl,
+            WebClient.Builder servicesWebClientBuilder
     ) {
-        return new WebClientProductsClient(selmagServicesWebClientBuilder
+        return new WebClientProductsClient(servicesWebClientBuilder
                 .baseUrl(catalogueBaseUrl)
                 .build());
     }
 
     @Bean
     public WebClientFavouriteProductsClient webClientFavouriteProductsClient(
-            @Value("${selmag.services.feedback.uri:http://localhost:8084}") String feedbackBaseUrl,
-            WebClient.Builder selmagServicesWebClientBuilder
+            @Value("${shopping4you.services.feedback.uri:http://localhost:8084}") String feedbackBaseUrl,
+            WebClient.Builder servicesWebClientBuilder
     ) {
-        return new WebClientFavouriteProductsClient(selmagServicesWebClientBuilder
+        return new WebClientFavouriteProductsClient(servicesWebClientBuilder
                 .baseUrl(feedbackBaseUrl)
                 .build());
     }
 
     @Bean
     public WebClientProductReviewsClient webClientProductReviewsClient(
-            @Value("${selmag.services.feedback.uri:http://localhost:8084}") String feedbackBaseUrl,
-            WebClient.Builder selmagServicesWebClientBuilder
+            @Value("${shopping4you.services.feedback.uri:http://localhost:8084}") String feedbackBaseUrl,
+            WebClient.Builder servicesWebClientBuilder
     ) {
-        return new WebClientProductReviewsClient(selmagServicesWebClientBuilder
+        return new WebClientProductReviewsClient(servicesWebClientBuilder
                 .baseUrl(feedbackBaseUrl)
                 .build());
     }
