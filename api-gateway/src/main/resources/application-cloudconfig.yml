@@ -1,0 +1,11 @@
+server:
+  port: 8086
+  forward-headers-strategy: framework
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: 'optional:configserver:'
+  cloud:
+    config:
+      uri: http://config:config-password@localhost:8888

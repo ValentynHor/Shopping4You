@@ -1,7 +1,7 @@
 shopping4you:
   services:
     catalogue:
-      uri: lb://shopping4you-catalogue-service
+      uri: lb://catalogue-service
       registration-id: keycloak
 spring:
   boot:

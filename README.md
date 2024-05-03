@@ -12,6 +12,7 @@ Das Ziel dieses Projekts ist es, alle geschriebene Klassen **vollständig zu tes
 - Lombok & Thymeleaf & Devtools
 - Admin Server
 - Victoria Metrics & Loki & Grafana
+- Eureka server & config server & gateway
 - 
 # Microservice:
 
@@ -90,11 +91,7 @@ Im Rahmen dieser Phase wurde die Monitoring-Infrastruktur erfolgreich implementi
 
 Durch die Integration von VictoriaMetrics als zentraler Datenspeicher und Grafana als benutzerfreundliche Dashboard-Plattform kann man jetzt kritische Informationen wie CPU-Auslastung, Speichernutzung, Netzwerkleistung und andere relevante Metriken überwachen. Dies ermöglicht es, potenzielle Engpässe oder Leistungsprobleme frühzeitig zu erkennen und entsprechend zu reagieren, um die Gesamtleistung und Zuverlässigkeit des Systems zu optimieren.
 
-Darüber hinaus bietet Grafana eine Vielzahl von Visualisierungsoptionen und Alarmierungsfunktionen, die es uns ermöglichen, benutzerdefinierte Dashboards zu erstellen und Warnmeldungen einzurichten, um auf kritische Ereignisse oder Abweichungen von definierten Schwellenwerten aufmerksam zu machen. Dies trägt dazu bei, die Verfügbarkeit und Stabilität der Anwendung sicherzustellen und die Ausfallzeiten zu minimieren.
-
 Loki ermöglicht das Sammeln, Speichern und Analysieren von Protokolldaten aus verschiedenen Quellen in einem zentralen Service. Durch die Integration von Loki können sämtliche Protokolle von Anwendungen, Diensten und Systemkomponenten effizient gesammelt und in einem einheitlichen Format gespeichert werden. Dies erleichtert die Suche, Analyse und Visualisierung von Protokolldaten, was wiederum eine schnellere Fehlerbehebung und ein verbesserter Einblick in das Systemverhalten ermöglicht.
-
-Durch die Kombination von Loki mit Grafana können wir außerdem benutzerdefinierte Dashboards erstellen, um sowohl Metriken als auch Protokolle in einer einzigen Ansicht zu visualisieren. Dies ermöglicht eine ganzheitliche Überwachung und Analyse des Systems und trägt dazu bei, die Effizienz und Zuverlässigkeit unserer Anwendung weiter zu verbessern.
 
 Um Victoria Metrics als Docker-Container auszuführen, können Sie den folgenden Docker-Befehl verwenden:
 ```
@@ -132,6 +129,12 @@ Im Rahmen dieser Phase wurde die Integration des Eureka-Servers erfolgreich durc
 - ## config-server
 
 Es wurde auch der Konfigurationsserver erfolgreich integriert, um eine zentrale und dynamische Verwaltung der Konfigurationen für alle Dienste zu ermöglichen. Der Konfigurationsserver ist ein wesentlicher Bestandteil unserer Microservices-Architektur, der es ermöglicht, Konfigurationsänderungen schnell vorzunehmen und sie zentralisiert zu verwalten. Durch die Integration des Passworts wird der Zugriff auf die Konfigurationsdaten auf autorisierte Benutzer beschränkt.
+
+- ## gateway 
+In dieser Phase wurde erfolgreich das Gateway in unsere Microservices-Architektur integriert. Das Gateway dient als zentraler Einstiegspunkt für externe Anfragen und ermöglicht eine effiziente und sichere Kommunikation zwischen unseren Mikroservices und externen Clients.
+
+Durch die Integration des Gateways können wir eine Reihe von Aufgaben wie Routing, Authentifizierung, Autorisierung und Lastenausgleich zentralisiert verwalten. Dies verbessert die Skalierbarkeit, Sicherheit und Wartbarkeit unserer Anwendung, indem wir die Komplexität unserer Mikroservices hinter einer einzigen Schnittstelle verbergen.
+
 
 
 
