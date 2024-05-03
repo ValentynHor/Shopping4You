@@ -1,8 +1,3 @@
-shopping4you:
-  services:
-    catalogue:
-      uri: lb://shopping4you-catalogue-service
-      registration-id: keycloak
 spring:
   boot:
     admin:
@@ -12,39 +7,46 @@ spring:
     url: jdbc:postgresql://localhost:5433/shopping2
     username: postgres
     password: 12345678
+  flyway:
+    schemas:
+      - public
+      - catalogue
+  jpa:
+    show-sql: true
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.23.16.1:8082/realms/shopping2
       client:
-        provider:
-          keycloak:
-            issuer-uri: http://172.23.16.1:8082/realms/shopping2
-            user-name-attribute: preferred_username
         registration:
           keycloak:
-            client-id: manager-app
-            client-secret: zfend08ini4FpbB8mBXr4chwp29DyZLj
-            scope:
-              - openid
-              - view_catalogue
-              - edit_catalogue
-              - microprofile-jwt
-          metrics:
-            provider: keycloak
-            client-id: manager-app-metrics-client
-            client-secret: Ox4ltZrpYUfdSy3ov4RzJTPK9AB6Tdps
+            client-id: catalogue-service
+            client-secret: pSEcb5KGPb2VX8kmbUqGarZ9SDys9xd0
             authorization-grant-type: client_credentials
             scope:
               - metrics_server
           discovery:
             provider: keycloak
-            client-id: manager-app
-            client-secret: Ox4ltZrpYUfdSy3ov4RzJTPK9AB6Tdps
+            client-id: catalogue-service
+            client-secret: pSEcb5KGPb2VX8kmbUqGarZ9SDys9xd0
             authorization-grant-type: client_credentials
             scope:
               - discovery
-      resourceserver:
-        jwt:
-          issuer-uri: http://172.23.16.1:8082/realms/shopping2
+        provider:
+          keycloak:
+            issuer-uri: http://172.23.16.1:8082/realms/shopping2
+logging:
+  level:
+    sql: info
+
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: catalogue-service-swagger-ui
+      use-pkce-with-authorization-code-grant: true
+keycloak:
+  uri: http://localhost:8082
 management:
   health:
     livenessstate:

@@ -129,6 +129,9 @@ docker run --name shopping4you-tracing -p 3200:3200 -p 9095:9095 -p 4317:4317 -p
 
 Im Rahmen dieser Phase wurde die Integration des Eureka-Servers erfolgreich durchgeführt, um eine umfassende Service-Registrierungs- und -Entdeckungslösung zu schaffen. Der Eureka-Server ist ein Open-Source-Tool, das speziell für Microservices-Architekturen entwickelt wurde und es ermöglicht, Dienste automatisch zu registrieren und ihre Verfügbarkeit zu überwachen.
 
-Durch die Integration des Eureka-Servers können Entwickler und Betreiber einen zentralen Anlaufpunkt für die Verwaltung und Überwachung ihrer Mikroservices-Infrastruktur schaffen. Dies umfasst die automatische Registrierung und Entdeckung von Diensten, die Überwachung der Verfügbarkeit und die Erkennung von Ausfällen oder Engpässen in Echtzeit.
+- ## config-server
+
+Es wurde auch der Konfigurationsserver erfolgreich integriert, um eine zentrale und dynamische Verwaltung der Konfigurationen für alle Dienste zu ermöglichen. Der Konfigurationsserver ist ein wesentlicher Bestandteil unserer Microservices-Architektur, der es ermöglicht, Konfigurationsänderungen schnell vorzunehmen und sie zentralisiert zu verwalten. Durch die Integration des Passworts wird der Zugriff auf die Konfigurationsdaten auf autorisierte Benutzer beschränkt.
+
 
 
